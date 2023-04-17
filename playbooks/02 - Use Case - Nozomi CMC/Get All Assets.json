@@ -20,8 +20,7 @@
             "name": "Configuration",
             "description": null,
             "arguments": {
-                "startTime": "",
-                "applianceID": ""
+                "applianceID": "1fb4918e-ed88-4717-82ec-28fec97dd6be"
             },
             "status": null,
             "top": "165",
@@ -62,10 +61,10 @@
             "description": null,
             "arguments": {
                 "name": "Nozomi Networks Central Management Console",
-                "config": "cbe9e659-dd9e-4c6c-928e-625c3c9f33ae",
+                "config": "aa7b94d7-01da-4e52-a191-e97519eb0baa",
                 "params": {
                     "query": "",
-                    "start_time": "{{vars.startTime}}",
+                    "start_time": "2022-11-30T18:30:00.000Z",
                     "appliance_ids": "{{vars.applianceID}}"
                 },
                 "version": "1.0.0",
@@ -120,16 +119,6 @@
             "isExecuted": false,
             "group": null,
             "uuid": "9bacd432-b4b3-4d98-b1df-1e52e5cd1239"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Get All Asset -> Create Asset Record",
-            "targetStep": "\/api\/3\/workflow_steps\/901c0eb6-4afe-40d2-9af8-3f499ff39354",
-            "sourceStep": "\/api\/3\/workflow_steps\/f385c2fd-855a-4353-94f4-d7841a0b315a",
-            "label": null,
-            "isExecuted": false,
-            "group": null,
-            "uuid": "2c4e22de-e136-4a45-820d-721ad4264b35"
         },
         {
             "@type": "WorkflowRoute",

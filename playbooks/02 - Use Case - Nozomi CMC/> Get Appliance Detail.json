@@ -10,7 +10,8 @@
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
     "parameters": [
-        "applianceId"
+        "applianceId",
+        "recordToLink"
     ],
     "synchronous": false,
     "collection": "\/api\/3\/workflow_collections\/566483c2-686f-4c7d-b8df-eb51583b1814",
@@ -39,6 +40,8 @@
                 "when": "{{vars.steps.Get_Appliance_Details.data.result | length > 0}}",
                 "resource": {
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "alerts": "{%if vars.input.params.recordToLink and vars.input.params.recordToLink['@type'] == 'Alert' %}{{vars.input.params.recordToLink['@id']}}{%endif%}",
+                    "assets": "{%if vars.input.params.recordToLink and vars.input.params.recordToLink['@type'] == 'Asset' %}{{vars.input.params.recordToLink['@id']}}{%endif%}",
                     "people": [],
                     "content": "<h4>Appliance Details<\/h4>\n<table>\n<tbody>\n<tr>\n<th>Appliance Id:<\/th>\n<td>{{vars.steps.Get_Appliance_Details.data.result[0]['id']}}<\/td>\n<\/tr>\n<tr>\n<th>Appliance IP:<\/th>\n<td>{{vars.steps.Get_Appliance_Details.data.result[0]['ip']}}<\/td>\n<\/tr>\n<tr>\n<th>Appliance Hostname:<\/th>\n<td>{{vars.steps.Get_Appliance_Details.data.result[0]['host']}}<\/td>\n<\/tr>\n<tr>\n<th>Appliance Type:<\/th>\n<td>{{vars.steps.Get_Appliance_Details.data.result[0]['info']['appliance_type']}}<\/td>\n<\/tr>\n<\/tbody>\n<\/table>",
                     "__replace": "",

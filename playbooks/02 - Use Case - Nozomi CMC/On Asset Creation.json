@@ -39,7 +39,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "705",
+            "top": "975",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
@@ -47,10 +47,53 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "Asset Change Activity Added New Asset",
+            "description": null,
+            "arguments": {
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>New <span class=\"badge badge-pill badge-danger\" style=\"background: #009d00; color: #fff;\">Asset Change Activity<\/span> record <a href=\"\/modules\/asset_change_activities\/{{vars.steps.Asset_Change_Activity_Added_New_Asset.uuid}}\" target=\"_blank\" rel=\"noopener\">{{vars.steps.Asset_Change_Activity_Added_New_Asset.title}}<\/a> is created.<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
+                "resource": {
+                    "title": "Added New Cyber Asset - {{vars.input.records[0].hostname}}",
+                    "assets": "{{vars.input.records[0]['@id']}}",
+                    "status": "\/api\/3\/picklists\/5f43696e-b2ad-4f03-8092-8fcdef2ef76d",
+                    "dueDate": "{{arrow.get(arrow.utcnow().shift(days=+vars.dueDays)).int_timestamp}}",
+                    "__replace": "",
+                    "assignedTo": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce",
+                    "recordTags": [
+                        "\/api\/3\/tags\/Add Cyber Asset",
+                        "\/api\/3\/tags\/OT IT"
+                    ],
+                    "description": "Added new cyber asset <b>{{vars.input.records[0].hostname}}<\/b> fetched from <span class=\"badge badge-pill badge-danger\" style=\"background: #009d00; color: #fff;\">Nozomi<\/span> ",
+                    "assetChangeType": "\/api\/3\/picklists\/8aaa06ca-9b13-405a-96d2-29381246d748"
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/asset_change_activities",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "4f2526cf-9849-47f6-ac1b-03ef8e6530de"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Configuration",
             "description": null,
             "arguments": {
-                "record": "{{vars.input.records[0]}}"
+                "record": "{{vars.input.records[0]}}",
+                "dueDays": "2"
             },
             "status": null,
             "top": "165",
@@ -58,6 +101,28 @@
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "0ae118b4-4f4c-488b-96f7-c694860302dc"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Appliance Detail",
+            "description": null,
+            "arguments": {
+                "arguments": {
+                    "applianceId": "{{vars.record['appliance_id']}}",
+                    "recordToLink": "{{vars.input.records[0]}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": false,
+                "workflowReference": "\/api\/3\/workflows\/119fa49b-b098-4618-8d3b-320587380959"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "ec393084-e148-4817-9ab3-255ef67b05b2"
         },
         {
             "@type": "WorkflowStep",
@@ -91,7 +156,7 @@
                 }
             },
             "status": null,
-            "top": "300",
+            "top": "570",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
             "group": null,
@@ -159,7 +224,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "570",
+            "top": "840",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
             "group": null,
@@ -188,7 +253,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "435",
+            "top": "705",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
             "group": null,
@@ -198,13 +263,33 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Configuration -> Get KEV Alert",
+            "name": "Asset Change Activity_Add New Asset -> Get CVEs By Vendor",
             "targetStep": "\/api\/3\/workflow_steps\/b061f2a4-cdab-46db-97a2-3114cd33d629",
+            "sourceStep": "\/api\/3\/workflow_steps\/4f2526cf-9849-47f6-ac1b-03ef8e6530de",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "407c2fa5-2dc8-4dfe-ba26-db66d6fdb973"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Get Appliance Detail",
+            "targetStep": "\/api\/3\/workflow_steps\/ec393084-e148-4817-9ab3-255ef67b05b2",
             "sourceStep": "\/api\/3\/workflow_steps\/0ae118b4-4f4c-488b-96f7-c694860302dc",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "0e68bbd4-ba7e-4029-8478-359fb7f03bea"
+            "uuid": "11e87e04-2fc1-4ef2-90cb-4a7e34a9ce16"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Appliance Detail -> Asset Change Activity_Add New Asset",
+            "targetStep": "\/api\/3\/workflow_steps\/4f2526cf-9849-47f6-ac1b-03ef8e6530de",
+            "sourceStep": "\/api\/3\/workflow_steps\/ec393084-e148-4817-9ab3-255ef67b05b2",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "1389093f-d8f6-45e6-a25f-8b08aebc8fb9"
         },
         {
             "@type": "WorkflowRoute",
